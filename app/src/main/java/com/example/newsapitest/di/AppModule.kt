@@ -1,10 +1,15 @@
 package com.example.newsapitest.di
 
+import android.content.Context
+import androidx.room.Room
 import com.example.newsapitest.api.NewsAPI
+import com.example.newsapitest.db.ArticleDatabase
+import com.example.newsapitest.db.NewsDAO
 import com.example.newsapitest.utils.Constants.Companion.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -54,5 +59,14 @@ object AppModule {
     @Singleton
     @Provides
     fun provideNewsApiService(retrofit: Retrofit): NewsAPI = retrofit.create(NewsAPI::class.java)
+
+    @Singleton
+    @Provides
+    fun provideArticleDatabase(@ApplicationContext appContext: Context) =
+        Room.databaseBuilder(appContext, ArticleDatabase::class.java, "articles_db").build()
+
+    @Singleton
+    @Provides
+    fun provideNewsDao(database: ArticleDatabase): NewsDAO = database.getNewsDao()
 
 }
