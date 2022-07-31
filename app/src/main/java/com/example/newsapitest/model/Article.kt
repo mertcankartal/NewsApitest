@@ -1,5 +1,8 @@
 package com.example.newsapitest.model
 
+import androidx.room.Entity
+
+@Entity(tableName = "articles")
 data class Article(
     val author: String,
     val content: String,
