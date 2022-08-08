@@ -10,14 +10,17 @@ import com.example.newsapitest.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import retrofit2.Response
-import java.lang.Exception
 import javax.inject.Inject
+import kotlin.Exception
 
 @HiltViewModel
 class NewsViewModel @Inject constructor(val repository: NewsRepository) : ViewModel() {
 
     val breakingNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
-    var newsPage = 1
+    var newsPage = 2
+
+    val searchedNews : MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
+    var searchNewsPage = 1
 
     init {
         getNews("tr",newsPage,Constants.API_KEY)
@@ -29,6 +32,15 @@ class NewsViewModel @Inject constructor(val repository: NewsRepository) : ViewMo
             breakingNews.value = Resource.Success(repository.getNews(countryCode, newsPage, apiKey))
         }catch (e:Exception){
             breakingNews.value = Resource.Error(e.message.toString())
+        }
+    }
+
+    fun searchNews(searchNews: String) = viewModelScope.launch {
+        searchedNews.postValue(Resource.Loading())
+        try {
+            searchedNews.postValue(Resource.Success(repository.searchNews(searchNews,searchNewsPage)))
+        }catch (e:Exception){
+            searchedNews.postValue(Resource.Error(e.message.toString()))
         }
     }
 
