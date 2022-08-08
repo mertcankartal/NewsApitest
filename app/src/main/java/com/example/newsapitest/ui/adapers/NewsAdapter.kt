@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.newsapitest.databinding.RecyclerRowBinding
 import com.example.newsapitest.model.Article
+import com.example.newsapitest.utils.Callback
 
-class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
+class NewsAdapter(val callBack:Callback) : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
     private val differCallBack = object : DiffUtil.ItemCallback<Article>() {
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
@@ -25,33 +26,31 @@ class NewsAdapter : RecyclerView.Adapter<NewsAdapter.ArticleViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         val binding = RecyclerRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ArticleViewHolder(binding)
+        return ArticleViewHolder(binding,callBack)
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) {
         val article = differ.currentList[position]
         holder.bind(article)
-        setOnItemClickListener { onItemClickListener?.let { it(article) } }
     }
 
     override fun getItemCount(): Int {
         return differ.currentList.size
     }
 
-    class ArticleViewHolder(private val binding: RecyclerRowBinding) : RecyclerView.ViewHolder(binding.root) {
+    class ArticleViewHolder(private val binding: RecyclerRowBinding,val callBack: Callback) : RecyclerView.ViewHolder(binding.root) {
         fun bind(article: Article) {
             Glide.with(binding.ivArticleImage.context).load(article.urlToImage)
                 .into(binding.ivArticleImage)
-            binding.tvSource.text = article.source.name
+            article.source?.let { binding.tvSource.text = it.name }
             binding.tvTitle.text = article.title
             binding.tvDescription.text = article.description
             binding.tvPublishedAt.text = article.publishedAt
+            binding.root.setOnClickListener {
+                callBack.onItemClickListener(article)
+            }
         }
+
     }
 
-    private var onItemClickListener: ((Article) -> Unit)? = null
-
-    fun setOnItemClickListener(listener : (Article) -> Unit){
-        onItemClickListener = listener
-    }
 }
