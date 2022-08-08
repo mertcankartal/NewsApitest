@@ -5,7 +5,11 @@ import androidx.room.Room
 import com.example.newsapitest.api.NewsAPI
 import com.example.newsapitest.db.ArticleDatabase
 import com.example.newsapitest.db.NewsDAO
+import com.example.newsapitest.repository.NewsRemoteData
+import com.example.newsapitest.repository.NewsRemoteDataImpl
+import com.example.newsapitest.repository.NewsRepository
 import com.example.newsapitest.utils.Constants.Companion.BASE_URL
+import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

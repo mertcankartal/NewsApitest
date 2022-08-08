@@ -14,7 +14,7 @@ interface NewsAPI {
         @Query("country") countryCode : String = COUNTRY_CODE,
         @Query("page") page : Int = 1,
         @Query("apiKey") apiKey : String = API_KEY
-    ):Response<NewsResponse>
+    ):NewsResponse
 
     @GET("v2/everything")
     suspend fun searchNews(
