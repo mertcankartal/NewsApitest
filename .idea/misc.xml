@@ -4,10 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/MERTCAN/AndroidStudioProjects/NewsApitest/app/src/main/res/drawable/ic_baseline_fiber_new_24.xml" value="0.136" />
-        <entry key="..\:/Users/MERTCAN/AndroidStudioProjects/NewsApitest/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/MERTCAN/AndroidStudioProjects/NewsApitest/app/src/main/res/layout/activity_main.xml" value="0.176" />
         <entry key="..\:/Users/MERTCAN/AndroidStudioProjects/NewsApitest/app/src/main/res/layout/fragment_breaking_news.xml" value="0.1" />
         <entry key="..\:/Users/MERTCAN/AndroidStudioProjects/NewsApitest/app/src/main/res/layout/fragment_saved_news.xml" value="0.1" />
         <entry key="..\:/Users/MERTCAN/AndroidStudioProjects/NewsApitest/app/src/main/res/layout/fragment_search_news.xml" value="0.1" />
+        <entry key="..\:/Users/MERTCAN/AndroidStudioProjects/NewsApitest/app/src/main/res/layout/recycler_row.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/MERTCAN/AndroidStudioProjects/NewsApitest/app/src/main/res/menu/bottom_menu.xml" value="0.25416666666666665" />
       </map>
     </option>
