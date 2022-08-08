@@ -8,4 +8,6 @@ import javax.inject.Inject
 
 interface NewsRepository {
     suspend fun getNews(countryCode: String, page: Int, apiKey: String) : NewsResponse
+
+    suspend fun searchNews(search:String,page: Int) : NewsResponse
 }

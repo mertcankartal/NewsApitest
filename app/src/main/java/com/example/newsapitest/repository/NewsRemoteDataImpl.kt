@@ -7,4 +7,8 @@ class NewsRemoteDataImpl @Inject constructor(val remoteData: NewsRemoteData) : N
     override suspend fun getNews(countryCode: String, page: Int, apiKey: String): NewsResponse {
         return remoteData.getNews(countryCode,page, apiKey)
     }
+
+    override suspend fun searchNews(search: String, page: Int): NewsResponse {
+        return remoteData.searchNews(search,page)
+    }
 }
