@@ -38,9 +38,9 @@ class NewsViewModel @Inject constructor(val repository: NewsRepository) : ViewMo
     fun searchNews(searchNews: String) = viewModelScope.launch {
         searchedNews.postValue(Resource.Loading())
         try {
-            searchedNews.postValue(Resource.Success(repository.searchNews(searchNews,searchNewsPage)))
+           searchedNews.value = Resource.Success(repository.searchNews(searchNews,searchNewsPage))
         }catch (e:Exception){
-            searchedNews.postValue(Resource.Error(e.message.toString()))
+            searchedNews.value = Resource.Error(e.message.toString())
         }
     }
 
