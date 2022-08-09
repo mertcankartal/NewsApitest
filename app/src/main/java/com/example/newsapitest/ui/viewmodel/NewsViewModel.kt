@@ -28,14 +28,14 @@ class NewsViewModel @Inject constructor(
     var searchNewsPage = 1
 
     init {
-        getNews("tr", newsPage, Constants.API_KEY)
+        getNews("tr")
     }
 
-    fun getNews(countryCode: String, page: Int, apiKey: String) = viewModelScope.launch {
+    fun getNews(countryCode: String) = viewModelScope.launch {
         breakingNews.postValue(Resource.Loading())
         try {
             breakingNews.value =
-                Resource.Success(remoteRepository.getNews(countryCode, newsPage, apiKey))
+                Resource.Success(remoteRepository.getNews(countryCode, newsPage))
         } catch (e: Exception) {
             breakingNews.value = Resource.Error(e.message.toString())
         }

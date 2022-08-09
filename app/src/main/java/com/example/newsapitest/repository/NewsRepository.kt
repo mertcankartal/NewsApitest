@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 interface NewsRepository {
-    suspend fun getNews(countryCode: String, page: Int, apiKey: String) : NewsResponse
+    suspend fun getNews(countryCode: String, page: Int) : NewsResponse
 
     suspend fun searchNews(search:String,page: Int) : NewsResponse
 }
