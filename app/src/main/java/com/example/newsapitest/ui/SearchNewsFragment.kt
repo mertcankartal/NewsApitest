@@ -30,6 +30,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import okhttp3.internal.notify
+import okhttp3.internal.notifyAll
 
 
 @AndroidEntryPoint
@@ -60,17 +62,28 @@ class SearchNewsFragment : Fragment(), Callback {
         setupRecyclerView()
 
         var job: Job? = null
-        etSearch.addTextChangedListener { editable ->
-            job?.cancel()
-            job = MainScope().launch {
-                delay(500L)
-                editable?.let {
-                    if (editable.toString().isNotEmpty()) {
-                        newViewModel.searchNews(editable.toString())
+
+        binding?.etSearch?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                job?.cancel()
+                job = MainScope().launch {
+                    delay(750L)
+                    if (p0?.length!! >= 3) {
+                        newViewModel.searchNews(p0.toString())
                     }
                 }
+
             }
-        }
+
+            override fun afterTextChanged(p0: Editable?) {
+
+            }
+
+        })
 
         newViewModel.searchedNews.observe(viewLifecycleOwner, Observer { response ->
             when (response) {
