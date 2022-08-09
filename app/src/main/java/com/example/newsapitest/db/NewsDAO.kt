@@ -16,9 +16,9 @@ interface NewsDAO {
     @Query("select * from articles")
      fun getAllNews() : LiveData<List<Article>>
 
-     @Query("select * from articles")
-     fun getAllNewsFlow() : Flow<List<Article>>
+     //@Query("select * from articles")
+     //fun getAllNewsFlow() : Flow<List<Article>>
 
      @Delete
-     fun deleteArticle(article: Article)
+     suspend fun deleteArticle(article: Article)
 }

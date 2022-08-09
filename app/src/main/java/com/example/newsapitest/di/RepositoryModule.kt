@@ -1,5 +1,7 @@
 package com.example.newsapitest.di
 
+import com.example.newsapitest.localRepository.NewsLocalDataImpl
+import com.example.newsapitest.localRepository.NewsLocalDataRepository
 import com.example.newsapitest.repository.NewsRemoteData
 import com.example.newsapitest.repository.NewsRemoteDataImpl
 import com.example.newsapitest.repository.NewsRepository
@@ -14,5 +16,8 @@ import dagger.hilt.components.SingletonComponent
 abstract class RepositoryModule {
     @Binds
     abstract fun provideNewsRepository(newsRemoteDataImpl: NewsRemoteDataImpl) : NewsRepository
+
+    @Binds
+    abstract fun provideNewsLocalRepository(newsLocalDataImpl: NewsLocalDataImpl) : NewsLocalDataRepository
 
 }
