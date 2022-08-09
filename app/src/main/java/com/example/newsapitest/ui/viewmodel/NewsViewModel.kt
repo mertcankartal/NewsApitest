@@ -22,7 +22,7 @@ class NewsViewModel @Inject constructor(
 ) : ViewModel() {
 
     val breakingNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
-    var newsPage = 2
+    var newsPage = 30
 
     val searchedNews: MutableLiveData<Resource<NewsResponse>> = MutableLiveData()
     var searchNewsPage = 1
