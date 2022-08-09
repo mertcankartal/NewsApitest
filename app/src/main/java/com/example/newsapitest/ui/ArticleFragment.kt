@@ -6,9 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebViewClient
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.newsapitest.R
 import com.example.newsapitest.databinding.FragmentArticleBinding
+import com.example.newsapitest.ui.viewmodel.NewsViewModel
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,6 +21,8 @@ class ArticleFragment : Fragment() {
     private val binding get() = _binding
 
     val args : ArticleFragmentArgs by navArgs()
+
+    val newViewModel: NewsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +45,11 @@ class ArticleFragment : Fragment() {
         binding?.webView?.apply {
             webViewClient = WebViewClient()
             article.url?.let { loadUrl(it) }
+        }
+
+        binding?.fab?.setOnClickListener {
+            newViewModel.saveArticle(article)
+            Snackbar.make(view,"Article Saved",Snackbar.LENGTH_SHORT).show()
         }
     }
 }
